@@ -5,14 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GTU Result Portal - Winter 2025</title>
     <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; text-align: center; background-color: #f0f2f5; padding-top: 50px; }
-        .card { background: white; padding: 30px; border-radius: 12px; display: inline-block; box-shadow: 0 8px 20px rgba(0,0,0,0.15); width: 350px; max-width: 90%; vertical-align: top; }
-        .logo { width: 100px; margin-bottom: 15px; }
-        input, select { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; font-size: 16px; }
-        button { width: 100%; padding: 12px; background: #1a5f7a; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 16px; margin-top: 10px; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; text-align: center; background-color: #f0f2f5; padding-top: 40px; margin: 0; }
+        .card { background: white; padding: 30px; border-radius: 12px; display: inline-block; box-shadow: 0 8px 20px rgba(0,0,0,0.15); width: 380px; max-width: 92%; vertical-align: top; margin-bottom: 20px; }
+        .logo { width: 90px; margin-bottom: 10px; }
+        label { display: block; text-align: left; font-size: 13px; font-weight: bold; color: #555; margin-bottom: 5px; margin-left: 2px; }
+        input, select { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; font-size: 15px; background-color: #fafafa; }
+        button { width: 100%; padding: 14px; background: #1a5f7a; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 16px; transition: 0.3s; }
+        button:hover { background: #144a5f; }
         
-        /* Loading Spinner Style */
-        .loader { border: 8px solid #f3f3f3; border-top: 8px solid #1a5f7a; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; display: inline-block; margin: 20px 0; }
+        /* Spinner */
+        .loader { border: 6px solid #f3f3f3; border-top: 6px solid #1a5f7a; border-radius: 50%; width: 45px; height: 45px; animation: spin 1s linear infinite; display: inline-block; margin: 15px 0; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
         #loading-section, #troll-section { display: none; }
@@ -24,48 +26,63 @@
 
     <div id="login-section" class="card">
         <img src="https://www.gtu.ac.in/img/logo.png" class="logo" alt="GTU">
-        <h2 style="font-size: 18px; color: #333; margin-bottom: 20px;">Student Result Portal <br><span style="color: #666; font-size: 14px;">Winter 2025 Examination</span></h2>
-        <input type="number" id="enrollment" placeholder="Enrollment Number" required>
-        <select>
-            <option>Select Exam</option>
-            <option selected>BE SEM 3 - Regular (JAN 2026)</option>
+        <h2 style="font-size: 19px; color: #1a5f7a; margin-bottom: 5px;">GUJARAT TECHNOLOGICAL UNIVERSITY</h2>
+        <p style="color: #666; font-size: 14px; margin-bottom: 25px;">Student Grade Card - Winter 2025</p>
+        
+        <label>Exam Name</label>
+        <select id="exam">
+            <option value="">-- Select Exam --</option>
+            <option value="BE">BE SEM 3 - Regular (JAN 2026)</option>
+            <option value="BPH">BPH SEM 3 - Regular (DEC 2025)</option>
+            <option value="DE">DE SEM 3 - Regular (JAN 2026)</option>
+            <option value="MBA">MBA SEM 1 - Regular (FEB 2026)</option>
+            <option value="BE7">BE SEM 7 - Regular (DEC 2025)</option>
         </select>
-        <button onclick="startLoading()">Search Result</button>
-        <p style="font-size: 11px; color: #999; margin-top: 20px;">© 2026 Gujarat Technological University</p>
+
+        <label>Enrollment Number</label>
+        <input type="number" id="enrollment" placeholder="e.g. 230010107001" required>
+
+        <button onclick="startLoading()">Show Result</button>
+        <p style="font-size: 11px; color: #aaa; margin-top: 25px;">Disclaimer: This is a fast-access mirror server for high traffic handling.</p>
     </div>
 
     <div id="loading-section" class="card">
         <img src="https://www.gtu.ac.in/img/logo.png" class="logo" alt="GTU">
         <div class="loader"></div>
-        <p>Fetching result from GTU Server...</p>
+        <p style="font-weight: bold; color: #444;">Accessing GTU Database...</p>
+        <p style="font-size: 12px; color: #888;">Validating Enrollment Number...</p>
     </div>
 
     <div id="troll-section" class="card">
-        <img src="https://www.gtu.ac.in/img/logo.png" class="logo" alt="GTU">
         <div class="troll-text">Koi result nahi aaya hai,<br>Padhne jaao! 😂</div>
         
         <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueXZueHpxZzR4ZzR4ZzR4ZzR4ZzR4ZzR4ZzR4ZzR4ZzR4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/lgVqVJjM6oLx6/giphy.gif" class="meme-img">
         
-        <p style="margin-top:20px; font-weight: bold; color: #1a5f7a;">Exam ki tayari karo, prank ki nahi!</p>
+        <p style="margin-top:20px; font-weight: bold; color: #1a5f7a;">Niklo yaha se!!</p>
+        <button onclick="location.reload()" style="background: #666; font-size: 12px; padding: 8px;">Try Another Number</button>
     </div>
 
     <script>
         function startLoading() {
             var enroll = document.getElementById('enrollment').value;
-            if (enroll.length < 5) {
-                alert("Please enter a valid Enrollment Number");
+            var exam = document.getElementById('exam').value;
+
+            if (exam === "") {
+                alert("Please select your Exam");
+                return;
+            }
+            if (enroll.length < 10) {
+                alert("Please enter a valid 12-digit Enrollment Number");
                 return;
             }
 
-            // Hide Login, Show Loading
             document.getElementById('login-section').style.display = 'none';
             document.getElementById('loading-section').style.display = 'block';
 
-            // Wait 2.5 seconds, then show the Troll
             setTimeout(function() {
                 document.getElementById('loading-section').style.display = 'none';
                 document.getElementById('troll-section').style.display = 'block';
-            }, 2500);
+            }, 3000); // 3 second delay for maximum tension
         }
     </script>
 </body>
